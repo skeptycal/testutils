@@ -29,19 +29,22 @@
 │   ├── docs.md
 │   ├── index.html
 │   └── template.md
+├── example.go
 ├── go.doc
 ├── go.mod
 ├── go.sum
 ├── go.test.sh
 ├── internal.go
 ├── make_tree_md.sh
+├── profile1643739665N.out
+├── profile1643819773N.out
 ├── test_utils.go
 ├── test_utils_test.go
 ├── tree.md
 ├── utils.go
 └── utils_test.go
 
-6 directories, 28 files
+6 directories, 31 files
 ```
 
 [get_tree]: (http://mama.indstate.edu/users/ice/tree/)

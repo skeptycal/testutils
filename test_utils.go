@@ -1,4 +1,4 @@
-package defaults
+package testutils
 
 import (
 	"fmt"
@@ -23,18 +23,9 @@ func AssertNotEqual(t *testing.T, testname string, argname string, want Any, got
 	})
 }
 
-func AssertTypeEquals(arg Any, typ string) error {
-	if a := GetType(arg); a != typ {
-		return fmt.Errorf("incorrect type: %v want %v", a, typ)
-	}
-	return nil
-}
-
-func IsString(arg Any) error { return AssertTypeEquals(arg, "string") }
-
 func AssertStringEquals(t *testing.T, testname string, argname string, want Any, got Any, wantErr bool) {
 
-	if err := IsString(want); err != nil {
+	if err, _ := IsString(want); err != nil {
 		if !wantErr {
 			t.Errorf("%v(%v): %v", testname, argname, err)
 			t.FailNow()
@@ -42,7 +33,7 @@ func AssertStringEquals(t *testing.T, testname string, argname string, want Any,
 		return
 	}
 
-	if err := IsString(got); err != nil {
+	if err, _ := IsString(got); err != nil {
 		if !wantErr {
 			t.Errorf("%v(%v): %v", testname, argname, err)
 			t.FailNow()
@@ -70,3 +61,12 @@ func AssertStringEquals(t *testing.T, testname string, argname string, want Any,
 		}
 	}
 }
+
+func IsType(arg Any, typ string) (err error, ok bool) {
+	if a := GetType(arg); a != typ {
+		return fmt.Errorf("incorrect type: %v want %v", a, typ), false
+	}
+	return nil, true
+}
+
+func IsString(arg Any) (err error, ok bool) { return IsType(arg, "string") }

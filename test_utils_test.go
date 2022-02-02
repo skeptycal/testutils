@@ -1,14 +1,14 @@
-package defaults
+package testutils
 
 import (
 	"testing"
 )
 
 func TestAssertTypeEquals(t *testing.T) {
-	if err := AssertTypeEquals(42, "string"); err == nil {
+	if err, _ := IsType(42, "string"); err == nil {
 		t.Error(err)
 	}
-	if err := AssertTypeEquals(42, "int"); err != nil {
+	if err, _ := IsType(42, "int"); err != nil {
 		t.Error(err)
 	}
 }
@@ -53,7 +53,7 @@ func TestIsString(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if err := IsString(tt.arg); (err != nil) != tt.wantErr {
+			if err, _ := IsString(tt.arg); (err != nil) != tt.wantErr {
 				t.Errorf("IsString() error = %v, wantErr %v", err, tt.wantErr)
 			}
 		})
